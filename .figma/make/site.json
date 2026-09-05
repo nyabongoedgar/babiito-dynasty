@@ -1,0 +1,10 @@
+{
+  "description": "This web application enables users to efficiently manage hierarchical data through a user-friendly interface, supporting seamless CRUD operations for dynamic content.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
