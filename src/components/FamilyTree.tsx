@@ -107,7 +107,14 @@ export default function FamilyTree({ members, highlightedId, focusId, onSelect }
           p: 4, cursor: "grab", "&:active": { cursor: "grabbing" },
           scrollbarWidth: "thin", scrollbarColor: "rgba(212,175,55,0.3) transparent",
         }}
-        onWheel={(e) => { e.preventDefault(); zoom(e.deltaY < 0 ? 0.08 : -0.08); }}
+        onWheel={(e) => {
+          // Trackpad pinch-to-zoom is reported as a wheel event with ctrlKey/metaKey
+          // set by the browser; a plain two-finger swipe has neither, so let that
+          // scroll the container normally instead of hijacking it into zoom.
+          if (!e.ctrlKey && !e.metaKey) return;
+          e.preventDefault();
+          zoom(e.deltaY < 0 ? 0.08 : -0.08);
+        }}
       >
         <Box sx={{ transform: `scale(${scale})`, transformOrigin: "top center", transition: "transform 0.15s" }}>
           {roots.map((root) => (
